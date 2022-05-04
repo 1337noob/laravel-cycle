@@ -1,0 +1,29 @@
+{
+    "name": "1337noob/laravel-cycle",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tony",
+            "email": "tony.danilin@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "cycle/orm": "^2.1.0",
+        "cycle/annotated": "^3.1.0",
+        "cycle/schema-migrations-generator": "^2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "L33tnoob\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "L33tnoob\\CycleServiceProvider"
+            ]
+        }
+    }
+}
