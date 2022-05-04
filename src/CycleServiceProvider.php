@@ -20,6 +20,7 @@ use Exception;
 use Illuminate\Support\ServiceProvider;
 use Cycle\Database;
 use Cycle\Database\Config;
+use L33tnoob\Console\Commands\SchemaDiff;
 use Spiral\Tokenizer\ClassesInterface;
 use Spiral\Tokenizer\ClassLocator;
 use Symfony\Component\Finder\Finder;
@@ -94,6 +95,11 @@ class CycleServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                SchemaDiff::class,
+            ]);
+        }
         $this->publishes([
             __DIR__ . '/../cfg/cycle.php' => config_path('cycle.php'),
         ]);

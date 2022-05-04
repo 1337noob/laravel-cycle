@@ -20,7 +20,7 @@ return [
         Cycle\Schema\Generator\RenderModifiers::class,         // render all schema modifiers
         // Cycle\Schema\Generator\SyncTables::class,              // sync table changes to database
         Cycle\Annotated\MergeIndexes::class,                   // add @Table column declarations
-        Cycle\Schema\Generator\Migrations\GenerateMigrations::class,  // generate migrations
+//        Cycle\Schema\Generator\Migrations\GenerateMigrations::class,  // generate migrations
         Cycle\Schema\Generator\GenerateTypecast::class,        // typecast non string columns
 
     ],
