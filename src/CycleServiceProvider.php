@@ -3,6 +3,8 @@
 namespace L33tnoob;
 
 use Cycle\Database\Config\DriverConfig;
+use Cycle\Migrations\Capsule;
+use Cycle\Migrations\CapsuleInterface;
 use Cycle\Migrations\Config\MigrationConfig;
 use Cycle\Migrations\FileRepository;
 use Cycle\Migrations\Migrator;
@@ -21,6 +23,7 @@ use Illuminate\Support\ServiceProvider;
 use Cycle\Database;
 use Cycle\Database\Config;
 use L33tnoob\Console\Commands\SchemaDiff;
+use L33tnoob\Console\Commands\SchemaMigrate;
 use Spiral\Tokenizer\ClassesInterface;
 use Spiral\Tokenizer\ClassLocator;
 use Symfony\Component\Finder\Finder;
@@ -91,6 +94,10 @@ class CycleServiceProvider extends ServiceProvider
         $this->app->singleton(ORMInterface::class, ORM::class);
 
         $this->app->singleton(EntityManager::class);
+
+        $this->app->singleton(Capsule::class, function () {
+            return new Capsule($this->app->make(Database\DatabaseManager::class)->database());
+        });
     }
 
     public function boot()
@@ -98,6 +105,7 @@ class CycleServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 SchemaDiff::class,
+                SchemaMigrate::class,
             ]);
         }
         $this->publishes([
